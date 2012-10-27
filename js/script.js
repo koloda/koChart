@@ -1,4 +1,4 @@
-var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
+var inputData = {data:{'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}, labels:{x:'Things', y:'Money', header:'My finances'} }
 
 				function koChart(){}
 
@@ -10,15 +10,17 @@ var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
 						this.min = 0;
 						this.summ = 0;
 						this.thingsCount = 0;
-						for (var item in  inputData)
+						for (var item in  inputData.data)
 						{
-							if (inputData[item] > this.max)
-								this.max = inputData[item];
-							if (inputData[item] < this.min)
-								this.min = inputData[item];
-							this.summ += (inputData[item]);
+							if (inputData.data[item] > this.max)
+								this.max = inputData.data[item];
+							if (inputData.data[item] < this.min)
+								this.min = inputData.data[item];
+							this.summ += (inputData.data[item]);
 							this.thingsCount ++;
 						}
+
+						this.inputData = inputData;
 
 						var cnvs = document.getElementById('pieChart');	
 						this.ok = false;
@@ -59,18 +61,21 @@ var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
 
 					drawBarChart:function()
 					{
+						//drawing coord.lines
 						this.drawLines();
 
-						//
+						// drawing labels
+						this.drawChartLabels();
 
+						this.barWidth = Math.floor( this.diagramm.width/ (this.thingsCount*(1.28) + 0.28) );
+						this.barMargin = Math.floor(this.barWidth*0.28);
 
-						
 
 						//drawing bars
 						var n=0;
-						for (var item in inputData)
+						for (var item in inputData.data)
 						{
-							this.drawBar({label:item, value:inputData[item], n:n});
+							this.drawBar({label:item, value:inputData.data[item], n:n});
 							n++;
 						}
 					},
@@ -83,7 +88,7 @@ var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
 						var v = new Object();
 						v.ty  = Math.floor(this.cY*0.4);
 						v.tx  = Math.floor(this.cX*0.3);
-						v.by  = Math.floor(2*this.cY*0.925);
+						v.by  = Math.floor(2*this.cY*0.9);
 						v.bx  = v.tx;
 
 						var h = new Object();
@@ -124,6 +129,7 @@ var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
 
 						this.kY = this.diagramm.height/(1.1*this.max0y);
 
+						ctx.fillStyle = '#666';
 						var y=0;
 						while (y<this.max+this.yStep)						
 						{
@@ -137,11 +143,27 @@ var inputData = {'girls':186, 'beer':237, 'milk':95, 'food':140, 'rent':223}
 
 						// console.log({m:this.max, k:this.kY});
 
-						this.barWidth = Math.floor( this.diagramm.width/ (this.thingsCount*(1.28) + 0.28) );
-						this.barMargin = Math.floor(this.barWidth*0.28);
+
 
 						//drawing 0x labels
 
+
+					},
+
+					drawChartLabels:function(){
+						//draw main label
+						ctx.font="20px Georgia";
+						ctx.fillStyle = '#333';
+
+						ctx.fillText(this.inputData.labels.header, 10, 25);
+						
+						//
+						ctx.font="16px Georgia";
+						ctx.fillStyle = '#666';
+
+						ctx.fillText(this.inputData.labels.y, (this.diagramm.left-this.inputData.labels.y.length*6)/2 , this.diagramm.top-10);
+
+						ctx.fillText(this.inputData.labels.x, this.diagramm.left + ( this.diagramm.width - this.inputData.labels.y.length*6)/2 , this.diagramm.bottom + 20);
 
 					},
 
