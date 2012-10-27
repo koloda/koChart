@@ -9,8 +9,36 @@
 			<h1> My finances</h1>
 		</header>
 		<section>
-			<canvas id="pieChart" height="310" width="450">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+			<canvas id="pieChart0" height="310" width="450">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+			<canvas id="pieChart1" height="310" width="450">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+			<canvas id="pieChart2" height="310" width="450">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+
+			<canvas id="pieChart3" class="small" height="200" width="300">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+			<canvas id="pieChart4" class="small" height="200" width="300">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
+			<canvas id="pieChart5" class="small" height="200" width="300">install normal browser, man. your old software doesn't support html5 canvas.</canvas>
 		</section>
 		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				var p1 = new koChart('pieChart0');
+				p1.init(inputData, {chartType:'pie'})
+
+				var p2 = new koChart('pieChart3');
+				p2.init(inputData, {chartType:'pie'});
+
+				var b1 = new koChart('pieChart1');
+				b1.init(inputData, {chartType:'bar'})
+
+				var b2 = new koChart('pieChart4');
+				b2.init(inputData, {chartType:'bar'});
+
+				var h1 = new koChart('pieChart2');
+				h1.init(inputDataH, {chartType:'histogramm'})
+
+				var h2 = new koChart('pieChart5');
+				h2.init(inputDataH, {chartType:'histogramm'});				
+			}
+		</script>
+
 	</body>
 </html>

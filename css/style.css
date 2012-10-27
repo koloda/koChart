@@ -11,23 +11,16 @@ section {
 	height: 400px;
 }
 
-#pieChart {
+canvas{
 	background: #fff;
-	margin-left: 50%;
-	position: absolute;
-	left: -225px;
+	/*margin-left: 50%;*/
+	/*position: absolute;*/
+	/*left: -225px;*/
 	margin-right: auto;
 	border-radius: 3px;
 	box-shadow: 0 1px 5px #666;
 }
 
-/* second example specific style */
-
-div#pieChart
-{
-	height: 400px;
-	width: 600px;
-}
 
 p {
 	text-align: center;
